@@ -57,7 +57,7 @@
               {
                 "encryption": "none",
                 "flow": "",
-                "id": "f1fc0d3f-570c-4a02-85f6-fd26ea9e7e23",
+                "id": "f835bd72-0ec6-490f-9445-ae7f42671e58",
                 "level": 8,
                 "security": "auto"
               }
@@ -92,7 +92,7 @@
       "tag": "block"
     }
   ],
-  "remarks": "V2RET–🌟-🇦🇹-🌟–FREE",
+  "remarks": "V2RET–🌟-🏳-🌟–FREE",
   "routing": {
     "domainStrategy": "IPIfNonMatch",
     "rules": [
