@@ -4,7 +4,18 @@
       "domain:googleapis.cn": "googleapis.com"
     },
     "servers": [
-      "1.1.1.1"
+      "1.1.1.1",
+      {
+        "address": "223.5.5.5",
+        "domains": [
+          "geosite:cn",
+          "geosite:geolocation-cn"
+        ],
+        "expectIPs": [
+          "geoip:cn"
+        ],
+        "port": 53
+      }
     ]
   },
   "inbounds": [
@@ -51,13 +62,13 @@
       "settings": {
         "vnext": [
           {
-            "address": "185.146.173.58",
+            "address": "185.146.173.158",
             "port": 80,
             "users": [
               {
                 "encryption": "none",
                 "flow": "",
-                "id": "f835bd72-0ec6-490f-9445-ae7f42671e58",
+                "id": "c8bec904-24d0-4933-8cf2-49578ce8880d",
                 "level": 8,
                 "security": "auto"
               }
@@ -92,7 +103,7 @@
       "tag": "block"
     }
   ],
-  "remarks": "V2RET–🌟-🏳-🌟–FREE",
+  "remarks": "V2RET - 🇦🇹 - FREE",
   "routing": {
     "domainStrategy": "IPIfNonMatch",
     "rules": [
@@ -101,8 +112,48 @@
           "1.1.1.1"
         ],
         "outboundTag": "proxy",
-        "port": "53",
-        "type": "field"
+        "port": "53"
+      },
+      {
+        "ip": [
+          "223.5.5.5"
+        ],
+        "outboundTag": "direct",
+        "port": "53"
+      },
+      {
+        "domain": [
+          "domain:googleapis.cn"
+        ],
+        "outboundTag": "proxy"
+      },
+      {
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "ip": [
+          "geoip:cn"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "domain": [
+          "geosite:cn"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "domain": [
+          "geosite:geolocation-cn"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "outboundTag": "proxy",
+        "port": "0-65535"
       }
     ]
   }
