@@ -1,1 +1,145 @@
-vmess://eyJhZGQiOiIxODUuMTQ2LjE3My4xNTgiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IjIuVjJyYXkuZGViaWFuLm9yZy5meHAuZGViaWFuLm9yZy5zcGVlZHRlc3QubmV0LuOCieOCj+OBquOBleOCieOCjy5pcm9yYWxwaC5tb25zdGVyLiIsImlkIjoiYmI0ZjQzNjEtNzI4Yi00ZDczLTlhM2ItNmVjNDY3ZTI3ZTY0IiwibmV0Ijoid3MiLCJwYXRoIjoiL3RlbGVncmFtLU1pbm9WcG5DaCx0ZWxlZ3JhbS1NaW5vVnBuQ2gsdGVsZWdyYW0tTWlub1ZwbkNoLHRlbGVncmFtLU1pbm9WcG5DaCx0ZWxlZ3JhbS1NaW5vVnBuQ2gsdGVsZWdyYW0tTWlub1ZwbkNoLHRlbGVncmFtLU1pbm9WcG5DaCx0ZWxlZ3JhbS1NaW5vVnBuQ2gsdGVsZWdyYW0tTWlub1ZwbkNoLHRlbGVncmFtLU1pbm9WcG5DaCx0ZWxlZ3JhbS1NaW5vVnBuQ2gsdGVsZWdyYW0tTWlub1ZwbkNoP2VkXHUwMDNkMjA0OCIsInBvcnQiOiI4MCIsInBzIjoiVjJSRVQgLSDwn4em8J+HuSAtIEZSRUUiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0=
+{
+  "remarks": "v2ret-h",
+  "log": {
+    "access": "",
+    "error": "",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "tag": "socks",
+      "port": 10808,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    },
+    {
+      "tag": "http",
+      "port": 10809,
+      "listen": "127.0.0.1",
+      "protocol": "http",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "185.146.173.237",
+            "port": 80,
+            "users": [
+              {
+                "id": "236405d2-ded2-4729-83e9-92694167fc33",
+                "alterId": 0,
+                "email": "t@t.tt",
+                "security": "auto",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "v2rayng-V2rayng-telegram-vip_v2rayng",
+          "headers": {
+            "Host": "V2RAyFasT_7.xN--78-Pv2CvTA065Cac9302FEA377a148g.WebSIte."
+          }
+        },
+        "sockopt": {
+          "dialerProxy": "fragment",
+          "tcpKeepAliveIdle": 100,
+          "mark": 255,
+          "tcpNoDelay": true
+        }
+      },
+      "mux": {
+        "enabled": true,
+        "concurrency": 8,
+        "xudpConcurrency": 8,
+        "xudpProxyUDP443": "reject"
+      }
+    },
+    {
+      "tag": "fragment",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "AsIs",
+        "fragment": {
+          "packets": "1-1",
+          "length": "1-3",
+          "interval": "5"
+        }
+      },
+      "streamSettings": {
+        "sockopt": {
+          "tcpNoDelay": true,
+          "tcpKeepAliveIdle": 100
+        }
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      }
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "api"
+        ],
+        "outboundTag": "api",
+        "enabled": true
+      },
+      {
+        "id": "5627785659655799759",
+        "type": "field",
+        "port": "0-65535",
+        "outboundTag": "proxy",
+        "enabled": true
+      }
+    ]
+  }
+}
